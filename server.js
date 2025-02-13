@@ -54,19 +54,33 @@ app.get('/', async (req, res) => {
   }
 });
 
-// Ruta per obtenir un usuari per ID
-app.get('/Llibres/:id', async (req, res) => {
+// Ruta per obtenir un llibre que estigui dins del rang de dates
+app.get('/list/:dataini/:datafi', async (req, res) => {
   try {
-    const llibre = await Llibres.findById(req.params.id);
-    if (!llibre) {
+
+    const { dataini, datafi } = req.params;
+    const startDate = dataini;
+    const endDate = datafi;
+    
+    // Buscar libros dentro del rango de años de publicación
+    const llibres = await Llibres.find({
+      anyPublicacio: { $gte: startDate, $lte: endDate }
+    });
+
+    if(llibres.length === 0) {
+      return res.status(404).json({ message: 'No books found in this date range' });
+    } 
+
+    if (!llibres) {
       return res.status(404).json({ message: 'Book not found' });
     }
-    res.status(200).json(llibre);
+    res.status(200).json(llibres);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching book', error: err.message });
   }
 });
 
+/*
 // Ruta per actualitzar un llibre per ID
 app.put('/Llibres/:id', async (req, res) => {
   try {
@@ -99,6 +113,7 @@ app.delete('/Llibres/:id', async (req, res) => {
     res.status(500).json({ message: 'Error deleting book', error: err.message });
   }
 });
+*/
 
 // Inicia el servidorxºxºz  
 app.listen(port, () => {
