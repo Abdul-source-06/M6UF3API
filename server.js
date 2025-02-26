@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://Abdul:abdul1234@cluster1.8tcez.mongodb.net/LlibCat?retryWrites=true&w=majority&appName=Cluster1', {
+mongoose.connect('mongodb+srv://Abdul:abdul1234@cluster1.8tcez.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
