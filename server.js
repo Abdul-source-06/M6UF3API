@@ -23,7 +23,8 @@ res.send('Hello World!');
 );
 
 app.post('/add', saveLlibres);
-app.get('/list', getLlibres);
+app.get('/list', (req, res) => {
+  res.send('Test list!')});
 app.get('/list/:dataini/:datafi', getByDate);
 
 // Iniciar servidor
