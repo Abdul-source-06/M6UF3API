@@ -1,9 +1,9 @@
 const Llibres = require('../model/llibresModel');
 
 // Obtener todos los libros
- function getLlibres(req, res) {
+async function getLlibres(req, res) {
   try {
-    const books =  Llibres.find();
+    const books = await Llibres.find().lean();
     res.status(200).json(books);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching books', error: err.message });
