@@ -31,7 +31,7 @@ const LlibresSchema = new mongoose.Schema({
 });
 
 
-const Llibres = mongoose.model('Llibres', LlibresSchema);
+const Llibres = mongoose.model('Llibreszz', LlibresSchema, 'Llibres');
 
 app.post('/add', saveLlibres);
 app.get('/list', (req, res) => {
