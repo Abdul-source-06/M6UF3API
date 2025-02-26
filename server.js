@@ -22,9 +22,29 @@ res.send('Hello World!');
 }
 );
 
+const LlibresSchema = new mongoose.Schema({
+  titol: String,
+  autor: String,
+  anyPublicacio: Number,
+  descripcio: String,
+  categories: [String]
+});
+
+
+const Llibres = mongoose.model('Llibres', LlibresSchema, 'Llibres');
+
 app.post('/add', saveLlibres);
 app.get('/list', (req, res) => {
-  res.send('Test list!')});
+  try {
+    console.log('Fetching books');
+    const books = Llibres.find();
+    console.log(books);
+    res.status(200).json(books);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching books', error: err.message });
+  }
+}
+);
 app.get('/list/:dataini/:datafi', getByDate);
 
 // Iniciar servidor
