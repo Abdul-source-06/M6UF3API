@@ -17,6 +17,11 @@ mongoose.connect('mongodb+srv://Abdul:abdul1234@cluster1.8tcez.mongodb.net/LlibC
   .catch(err => console.log('Error connecting to MongoDB:', err));
 
 // Definir rutas usando las funciones importadas
+app.get('/', (req, res) => {
+res.send('Hello World!');
+}
+);
+
 app.post('/add', saveLlibres);
 app.get('/list', getLlibres);
 app.get('/list/:dataini/:datafi', getByDate);
